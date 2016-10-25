@@ -1,5 +1,6 @@
 import io
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
+from os.path import join
 
 
 with io.open('README.md') as readme_file:
@@ -14,6 +15,14 @@ def test_suite():
 
     suite = unittest.TestLoader().discover("tests")
     return suite
+
+
+speedup_module = Extension(
+                      "mapbox_vector_tile.speedups",
+                      sources=[
+                          join("mapbox_vector_tile", "speedups", "encode_py.cpp"),
+                      ]
+                  )
 
 setup(name='mapbox-vector-tile',
       version='1.0.0',
@@ -35,5 +44,7 @@ setup(name='mapbox-vector-tile',
           "shapely",
           "future",
           "pyclipper"
-      ]
+      ],
+      provides = ['speedups'],
+      ext_modules=[speedup_module]
       )

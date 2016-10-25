@@ -2,3 +2,5 @@ dist/
 build/
 *.pyc
 mapbox_vector_tile.egg-info/
+*.so
+*.dll
