@@ -15,7 +15,7 @@ def test_suite():
     suite = unittest.TestLoader().discover("tests")
     return suite
 
-setup(name='mapbox-vector-tile',
+setup(name='mapbox-vector-tile-mappy',
       version='1.0.0',
       description=u"Mapbox Vector Tile",
       long_description=long_description,
@@ -23,7 +23,7 @@ setup(name='mapbox-vector-tile',
       keywords='',
       author=u"Harish Krishna",
       author_email='harish.krsn@gmail.com',
-      url='https://github.com/tilezen/mapbox-vector-tile',
+      url='https://github.com/Mappy/mapbox-vector-tile',
       license='MIT',
       packages=find_packages(),
       include_package_data=True,
