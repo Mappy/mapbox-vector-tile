@@ -30,11 +30,11 @@ def on_invalid_geometry_make_valid(shape):
 
 def on_invalid_geometry_make_valid_and_clean(shape):
     shape = make_it_valid(shape, asserted=False)
-    if not shape.is_valid and shape.type == 'MultiPolygon':
+    if not shape.is_valid and shape.geom_type == 'MultiPolygon':
         shape = clean_multi(shape)
     assert shape.is_valid, \
         "Not valid %s %s because %s" \
-        % (shape.type, shape.wkt, explain_validity(shape))
+        % (shape.geom_type, shape.wkt, explain_validity(shape))
     return shape
 
 
@@ -102,7 +102,7 @@ class VectorTile:
                 self.addFeature(feature, shape, y_coord_down)
 
     def enforce_winding_order(self, shape, y_coord_down, n_try=1):
-        if shape.type == 'MultiPolygon':
+        if shape.geom_type == 'MultiPolygon':
             # If we are a multipolygon, we need to ensure that the
             # winding orders of the consituent polygons are
             # correct. In particular, the winding order of the
@@ -113,7 +113,7 @@ class VectorTile:
             shape = self.enforce_multipolygon_winding_order(
                 shape, y_coord_down, n_try)
 
-        elif shape.type == 'Polygon':
+        elif shape.geom_type == 'Polygon':
             # Ensure that polygons are also oriented with the
             # appropriate winding order. Their exterior rings must
             # have a clockwise order, which is translated into a
@@ -163,14 +163,14 @@ class VectorTile:
         return shape
 
     def enforce_multipolygon_winding_order(self, shape, y_coord_down, n_try):
-        assert shape.type == 'MultiPolygon'
+        assert shape.geom_type == 'MultiPolygon'
 
         parts = []
         for part in shape.geoms:
             part = self.enforce_polygon_winding_order(
                 part, y_coord_down, n_try)
             if part is not None and not part.is_empty:
-                if part.type == 'MultiPolygon':
+                if part.geom_type == 'MultiPolygon':
                     parts.extend(part.geoms)
                 else:
                     parts.append(part)
@@ -188,7 +188,7 @@ class VectorTile:
         return oriented_shape
 
     def enforce_polygon_winding_order(self, shape, y_coord_down, n_try):
-        assert shape.type == 'Polygon'
+        assert shape.geom_type == 'Polygon'
 
         def fn(point):
             x, y = point
@@ -243,17 +243,17 @@ class VectorTile:
         f.geometry.extend(geometry)
 
     def _get_feature_type(self, shape):
-        if shape.type == 'Point' or shape.type == 'MultiPoint':
+        if shape.geom_type == 'Point' or shape.geom_type == 'MultiPoint':
             return self.tile.Point
-        elif shape.type == 'LineString' or shape.type == 'MultiLineString':
+        elif shape.geom_type == 'LineString' or shape.geom_type == 'MultiLineString':
             return self.tile.LineString
-        elif shape.type == 'Polygon' or shape.type == 'MultiPolygon':
+        elif shape.geom_type == 'Polygon' or shape.geom_type == 'MultiPolygon':
             return self.tile.Polygon
-        elif shape.type == 'GeometryCollection':
+        elif shape.geom_type == 'GeometryCollection':
             raise ValueError('Encoding geometry collections not supported')
         else:
             raise ValueError('Cannot encode unknown geometry type: %s' %
-                             shape.type)
+                             shape.geom_type)
 
     def _chunker(self, seq, size):
         return [seq[pos:pos + size] for pos in xrange(0, len(seq), size)]

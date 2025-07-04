@@ -119,26 +119,26 @@ class GeometryEncoder:
             self.encode_polygon(polygon)
 
     def encode(self, shape):
-        if shape.type == 'GeometryCollection':
+        if shape.geom_type == 'GeometryCollection':
             # do nothing
             pass
-        elif shape.type == 'Point':
+        elif shape.geom_type == 'Point':
             x, y = self.coords_on_grid(shape.x, shape.y)
             cmd_encoded = encode_cmd_length(CMD_MOVE_TO, 1)
             self._geometry = [cmd_encoded,
                               zigzag(x),
                               zigzag(y)]
-        elif shape.type == 'MultiPoint':
+        elif shape.geom_type == 'MultiPoint':
             self.encode_multipoint(shape.geoms)
-        elif shape.type == 'LineString':
+        elif shape.geom_type == 'LineString':
             coords = iter(shape.coords)
             self.encode_arc(coords)
-        elif shape.type == 'MultiLineString':
+        elif shape.geom_type == 'MultiLineString':
             self.encode_multilinestring(shape)
-        elif shape.type == 'Polygon':
+        elif shape.geom_type == 'Polygon':
             self.encode_polygon(shape)
-        elif shape.type == 'MultiPolygon':
+        elif shape.geom_type == 'MultiPolygon':
             self.encode_multipolygon(shape)
         else:
-            raise NotImplementedError("Can't do %s geometries" % shape.type)
+            raise NotImplementedError("Can't do %s geometries" % shape.geom_type)
         return self._geometry
