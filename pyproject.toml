@@ -5,10 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mapbox-vector-tile-mappy"
 version = "1.0.10"
-description = "Mapbox Vector Tile"
-classifiers = []
-keywords = ""
-authors = [{name = "", email = ""}]
+description = "Mapbox Vector Tile - Python library for encoding and decoding Mapbox vector tiles"
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+keywords = ["mapbox", "vector", "tile", "gis", "geospatial"]
+authors = [{name = "Mappy Team", email = "dt.lbs.map@mappy.com"}]
 license = {text = "MIT"}
 urls = {Homepage = "http://fr.mappy.com/"}
 requires-python = ">= 3.11"
@@ -22,4 +25,3 @@ dependencies = [
 packages = ["mapbox_vector_tile"]
 include-package-data = true
 zip-safe = false
-test-suite = "setup.test_suite"
