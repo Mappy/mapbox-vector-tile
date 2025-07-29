@@ -100,7 +100,7 @@ def _polytree_node_to_shapely(node, asserted):
 
         if asserted:
             assert poly.is_valid
-        if poly.type == 'MultiPolygon':
+        if poly.geom_type == 'MultiPolygon':
             polygons.extend(poly.geoms)
         else:
             polygons.append(poly)
@@ -193,7 +193,7 @@ def make_valid_multipolygon(shape, asserted):
 
         valid_g = make_valid_polygon(g, asserted)
 
-        if valid_g.type == 'MultiPolygon':
+        if valid_g.geom_type == 'MultiPolygon':
             new_g.extend(valid_g.geoms)
         else:
             new_g.append(valid_g)
@@ -209,10 +209,10 @@ def make_it_valid(shape, asserted=True):
     if shape.is_empty:
         return shape
 
-    elif shape.type == 'MultiPolygon':
+    elif shape.geom_type == 'MultiPolygon':
         shape = make_valid_multipolygon(shape, asserted)
 
-    elif shape.type == 'Polygon':
+    elif shape.geom_type == 'Polygon':
         shape = make_valid_polygon(shape, asserted)
 
     return shape
@@ -225,16 +225,16 @@ def clean_multi(shape):
     polygons = []
     exterior_lines = []
     interior_lines = []
-    for p in shape:
+    for p in shape.geoms:
         exterior_lines = []
         interior_lines = []
         lnum = 0
         boundary = p.boundary
-        if boundary.type == 'LineString':
+        if boundary.geom_type == 'LineString':
             if lnum == 0:
                 exterior_lines.append(boundary)
         else:
-            for ls in boundary:
+            for ls in boundary.geoms:
                 if lnum == 0:
                     exterior_lines.append(ls)
                 else:

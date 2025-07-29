@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mapbox-vector-tile-mappy"
+version = "1.0.10"
+description = "Mapbox Vector Tile"
+classifiers = []
+keywords = ""
+authors = [{name = "", email = ""}]
+license = {text = "MIT"}
+urls = {Homepage = "http://fr.mappy.com/"}
+requires-python = ">= 3.11"
+dependencies = [
+    "protobuf",
+    "shapely",
+    "pyclipper"
+]
+
+[tool.setuptools]
+packages = ["mapbox_vector_tile"]
+include-package-data = true
+zip-safe = false
+test-suite = "setup.test_suite"
