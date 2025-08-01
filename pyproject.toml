@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mapbox-vector-tile-mappy"
-version = "1.0.10"
+version = "1.0.11"
 description = "Mapbox Vector Tile - Python library for encoding and decoding Mapbox vector tiles"
 readme = "README.md"
 classifiers = [
@@ -19,7 +19,11 @@ requires-python = ">= 3.11"
 dependencies = [
     "protobuf",
     "shapely",
-    "pyclipper"
+    "pyclipper",
+    "setuptools>=80.9.0",
+    "wheel>=0.40.0",
+    "build>=1.0.0",
+    "twine>=4.0.0"
 ]
 
 [tool.setuptools]
