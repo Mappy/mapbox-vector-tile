@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mapbox-vector-tile-mappy"
-version = "1.0.11"
+version = "1.0.12"
 description = "Mapbox Vector Tile - Python library for encoding and decoding Mapbox vector tiles"
 readme = "README.md"
 classifiers = [
@@ -26,7 +26,6 @@ dependencies = [
     "twine>=4.0.0"
 ]
 
-[tool.setuptools]
-packages = ["mapbox_vector_tile"]
-include-package-data = true
-zip-safe = false
+[tool.setuptools.packages.find]
+where = [""]
+include = ["mapbox_vector_tile"]
