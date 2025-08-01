@@ -499,12 +499,12 @@ class InvalidGeometryTest(unittest.TestCase):
 
         total_area = 0
         for g in valid_geometries:
-            self.assertEquals(1, len(g))
+            self.assertEqual(1, len(g))
             p = shapely.geometry.Polygon(g[0])
             self.assertTrue(p.is_valid)
             self.assertGreater(p.area, 0)
             total_area += p.area
-        self.assertEquals(2, total_area)
+        self.assertEqual(2, total_area)
 
     def test_make_valid_self_crossing(self):
         from mapbox_vector_tile import encode
@@ -550,7 +550,7 @@ class InvalidGeometryTest(unittest.TestCase):
             self.assertTrue(p.is_valid)
             self.assertGreater(p.area, 0)
             total_area += p.area
-        self.assertEquals(50, total_area)
+        self.assertEqual(50, total_area)
 
     def test_validate_generates_rounding_error(self):
         from mapbox_vector_tile import encode
@@ -636,7 +636,7 @@ class InvalidGeometryTest(unittest.TestCase):
             p = shapely.geometry.Polygon(poly[0], poly[1:])
             self.assertTrue(p.is_valid)
             area += p.area
-        self.assertEquals(4339852.5, area)
+        self.assertEqual(4339852.5, area)
 
     def test_too_small_geometry(self):
         from mapbox_vector_tile import encode

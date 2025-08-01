@@ -100,7 +100,7 @@ def _polytree_node_to_shapely(node, asserted):
 
         if asserted:
             assert poly.is_valid
-        if poly.geom_type == 'MultiPolygon':
+        if poly.type == 'MultiPolygon':
             polygons.extend(poly.geoms)
         else:
             polygons.append(poly)

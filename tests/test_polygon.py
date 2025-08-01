@@ -27,7 +27,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(24, fixed.area)
+        self.assertEqual(24, fixed.area)
 
     def test_polygon_self_touching(self):
         geom = wkt.loads("""POLYGON(
@@ -35,7 +35,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(21, fixed.area)
+        self.assertEqual(21, fixed.area)
 
     def test_polygon_self_touching_inner(self):
         geom = wkt.loads("""POLYGON(
@@ -44,7 +44,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(28, fixed.area)
+        self.assertEqual(28, fixed.area)
 
     def test_polygon_inners_touching(self):
         geom = wkt.loads("""POLYGON(
@@ -54,7 +54,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(28, fixed.area)
+        self.assertEqual(28, fixed.area)
 
     def test_polygon_inner_touching_outer(self):
         geom = wkt.loads("""POLYGON(
@@ -63,7 +63,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(8, fixed.area)
+        self.assertEqual(8, fixed.area)
 
     def test_polygon_two_inners_touching_outer(self):
         geom = wkt.loads("""POLYGON(
@@ -73,7 +73,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(16, fixed.area)
+        self.assertEqual(16, fixed.area)
 
     def test_polygon_inners_touching_colinear(self):
         geom = wkt.loads("""POLYGON(
@@ -84,7 +84,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(26, fixed.area)
+        self.assertEqual(26, fixed.area)
 
     def test_polygon_inner_colinear_outer(self):
         geom = wkt.loads("""POLYGON(
@@ -93,7 +93,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         )""")
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(7, fixed.area)
+        self.assertEqual(7, fixed.area)
 
     def test_polygon_many_inners_touching(self):
         geom = wkt.loads("""POLYGON(
@@ -106,7 +106,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(21, fixed.area)
+        self.assertEqual(21, fixed.area)
 
     def test_polygon_inner_spike(self):
         geom = wkt.loads("""POLYGON(
@@ -116,7 +116,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(10, fixed.area)
+        self.assertEqual(10, fixed.area)
 
     def test_polygon_disconnected_inner(self):
         geom = wkt.loads("""POLYGON(
@@ -134,7 +134,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(20.5, fixed.area)
+        self.assertEqual(20.5, fixed.area)
 
     def test_polygon_disconnected_outer(self):
         geom = wkt.loads("""POLYGON(
@@ -144,7 +144,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(9, fixed.area)
+        self.assertEqual(9, fixed.area)
 
     def test_polygon_ring_of_inners(self):
         geom = wkt.loads("""POLYGON(
@@ -157,7 +157,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(14, fixed.area)
+        self.assertEqual(14, fixed.area)
 
     def test_polygon_ring_of_inners_2(self):
         geom = wkt.loads("""POLYGON(
@@ -172,7 +172,7 @@ class TestPolygonMakeValid(unittest.TestCase):
         self.assertFalse(geom.is_valid)
         fixed = make_it_valid(geom)
         self.assertTrue(fixed.is_valid)
-        self.assertEquals(22, fixed.area)
+        self.assertEqual(22, fixed.area)
 
     def test_clean_multi(self):
         geom = wkt.loads("""MULTIPOLYGON (((1796 -189, 1794 -188, 1794 -190, 1798 -192,
