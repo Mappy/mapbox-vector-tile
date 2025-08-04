@@ -4,6 +4,26 @@ Mapbox Vector Tile
 [![Build Status](https://travis-ci.org/tilezen/mapbox-vector-tile.svg?branch=master)](https://travis-ci.org/tilezen/mapbox-vector-tile)
 [![Coverage Status](https://coveralls.io/repos/github/tilezen/mapbox-vector-tile/badge.svg?branch=master)](https://coveralls.io/github/tilezen/mapbox-vector-tile?branch=master)
 
+
+## For compatibility with protobuf 4.21.1
+Regenerate the protobuf files from the protobuf definitions.
+
+Get the right version of protoc
+
+```bash
+PB_REL="https://github.com/protocolbuffers/protobuf/releases"
+curl -LO $PB_REL/download/v22.1/protoc-22.1-linux-x86_64.zip
+unzip protoc-22.1-linux-x86_64.zip
+```
+
+
+```bash
+cd mapbox_vector_tile/Mapbox/proto
+../../../bin/protoc --python_out=. vector_tile_p3.proto
+mv vector_tile_p3_p2.py ../
+```
+
+
 Installation
 ------------
 
