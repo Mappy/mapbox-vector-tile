@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mapbox-vector-tile-mappy"
+version = "1.0.15"
+description = "Mapbox Vector Tile - Python library for encoding and decoding Mapbox vector tiles"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: GIS",
+]
+keywords = ["mapbox", "vector", "tile", "gis", "geospatial"]
+authors = [{name = "Mappy Team", email = "dt.lbs.map@mappy.com"}]
+license = "MIT"
+urls = {Homepage = "http://fr.mappy.com/"}
+requires-python = ">= 3.11"
+dependencies = [
+    "protobuf==4.21",
+    "shapely",
+    "pyclipper",
+    "setuptools>=80.9.0",
+    "wheel>=0.40.0",
+    "build>=1.0.0",
+    "twine>=4.0.0"
+]
+
+[tool.setuptools.packages.find]
+where = [""]
+include = ["mapbox_vector_tile*"]
+exclude = ["tests*"]
+

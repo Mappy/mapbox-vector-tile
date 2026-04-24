@@ -6,8 +6,6 @@ import unittest
 
 import mapbox_vector_tile
 from mapbox_vector_tile import encode, decode
-from mapbox_vector_tile.compat import PY3
-from past.builtins import long, unicode
 
 from shapely import wkt
 
@@ -141,14 +139,10 @@ class TestDifferentGeomFormats(BaseTestCase):
         self.assertEqual(str(ex.exception), expected_result)
 
     def test_encode_unicode_property(self):
-        if PY3:
-            func = str
-        else:
-            func = unicode
         geometry = "LINESTRING(-71.160281 42.258729,-71.160837 43.259113,-71.161144 42.25932)"  # noqa
         properties = {
-            "foo": func(self.feature_properties["foo"]),
-            "baz": func(self.feature_properties["baz"]),
+            "foo": str(self.feature_properties["foo"]),
+            "baz": str(self.feature_properties["baz"]),
         }
         self.assertRoundTrip(
             input_geometry=geometry,
@@ -247,8 +241,7 @@ class TestDifferentGeomFormats(BaseTestCase):
     def test_encode_property_long(self):
         geometry = 'POINT(0 0)'
         properties = {
-            'test_int': int(1),
-            'test_long': long(1)
+            'test_int': int(1)
         }
         self.assertRoundTrip(
             input_geometry=geometry,
@@ -506,12 +499,12 @@ class InvalidGeometryTest(unittest.TestCase):
 
         total_area = 0
         for g in valid_geometries:
-            self.assertEquals(1, len(g))
+            self.assertEqual(1, len(g))
             p = shapely.geometry.Polygon(g[0])
             self.assertTrue(p.is_valid)
             self.assertGreater(p.area, 0)
             total_area += p.area
-        self.assertEquals(2, total_area)
+        self.assertEqual(2, total_area)
 
     def test_make_valid_self_crossing(self):
         from mapbox_vector_tile import encode
@@ -557,7 +550,7 @@ class InvalidGeometryTest(unittest.TestCase):
             self.assertTrue(p.is_valid)
             self.assertGreater(p.area, 0)
             total_area += p.area
-        self.assertEquals(50, total_area)
+        self.assertEqual(50, total_area)
 
     def test_validate_generates_rounding_error(self):
         from mapbox_vector_tile import encode
@@ -643,7 +636,7 @@ class InvalidGeometryTest(unittest.TestCase):
             p = shapely.geometry.Polygon(poly[0], poly[1:])
             self.assertTrue(p.is_valid)
             area += p.area
-        self.assertEquals(4339852.5, area)
+        self.assertEqual(4339852.5, area)
 
     def test_too_small_geometry(self):
         from mapbox_vector_tile import encode
